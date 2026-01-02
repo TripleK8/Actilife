@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือการใช้งาน ActiLife</title>
+    <!-- นำเข้าฟอนต์ภาษาไทยสารบรรณ -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0056b3; /* สีหลัก (น้ำเงินเข้ม) */
+            --text-color: #333;
+            --bg-color: #f0f0f0;
+            --paper-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* จำลองกระดาษ A4 */
+        .page {
+            background-color: var(--paper-color);
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 25mm;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* หัวข้อหลัก */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 24pt;
+        }
+
+        h2 {
+            color: #444;
+            font-size: 16pt;
+            margin-top: 25px;
+            background-color: #eef6ff;
+            padding: 8px 15px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 14pt;
+            text-align: justify;
+        }
+
+        /* ส่วนแสดงรูปภาพ */
+        .image-container {
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px dashed #ccc; /* เส้นประแสดงขอบเขตภาพ */
+            padding: 10px;
+            background-color: #fafafa;
+            border-radius: 8px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .img-caption {
+            margin-top: 8px;
+            font-size: 12pt;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* ปุ่มสั่งพิมพ์ (จะไม่แสดงตอนพิมพ์จริง) */
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .print-btn:hover {
+            background-color: #003d82;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive สำหรับมือถือ */
+        @media screen and (max-width: 768px) {
+            .page {
+                width: 100%;
+                padding: 15px;
+                height: auto;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+
+        /* ตั้งค่าสำหรับการสั่งพิมพ์ (Print / Save as PDF) */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                padding: 0;
+            }
+            .print-btn {
+                display: none;
+            }
+            .image-container {
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()">🖨️ บันทึกเป็น PDF / พิมพ์</button>
+
+    <div class="page">
+        <h1>คู่มือการใช้งานโปรแกรม ActiLife เบื้องต้น</h1>
+        <p>เอกสารฉบับนี้จัดทำขึ้นเพื่อแนะนำขั้นตอนการใช้งานโปรแกรม ActiLife สำหรับดึงข้อมูลและตั้งค่าอุปกรณ์วัดกิจกรรมทางกาย (ActiGraph) อย่างง่าย</p>
+
+        <!-- ขั้นตอนที่ 1 -->
+        <h2>1. การเชื่อมต่ออุปกรณ์ (Device Connection)</h2>
+        <p>เสียบอุปกรณ์ ActiGraph เข้ากับแท่นชาร์จ (Dock) หรือสาย USB และเชื่อมต่อเข้ากับคอมพิวเตอร์ จากนั้นเปิดโปรแกรม ActiLife ขึ้นมา</p>
+        <div class="image-container">
+            <!-- 
+                ตัวอย่าง: ลิงก์จาก Google Drive
+                ต้องใช้รูปแบบ: https://drive.google.com/uc?export=view&id=YOUR_FILE_ID
+            -->
+            <img src="https://drive.google.com/uc?export=view&id=18F3PDoB-HPDRb3uDJ0J1mvXDU6LGHRVq" 
+                 onerror="this.src='https://placehold.co/600x300?text=Image+1+Error'" alt="p1">
+            <div class="img-caption">ภาพที่ 1: การเชื่อมต่ออุปกรณ์</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 2 -->
+        <h2>2. การตั้งค่าอุปกรณ์ (Initialization)</h2>
+        <p>เมื่อโปรแกรมตรวจพบอุปกรณ์ ให้ไปที่แท็บ <strong>Devices</strong> เลือกอุปกรณ์ที่ต้องการ แล้วคลิกปุ่ม <strong>Initialize</strong> เพื่อเริ่มการตั้งค่าการบันทึกข้อมูล</p>
+        <div class="image-container">
+            <!-- นำ ID ของรูปที่ 2 มาใส่ตรง id=ด้านหลัง -->
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่2_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p2">
+            <div class="img-caption">ภาพที่ 2: หน้าต่างการตั้งค่า (Initialize)</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 3 -->
+        <h2>3. การดาวน์โหลดข้อมูล (Data Download)</h2>
+        <p>เมื่อใช้งานเสร็จสิ้น ให้เชื่อมต่ออุปกรณ์อีกครั้ง เลือกอุปกรณ์ในรายการ และคลิกปุ่ม <strong>Download</strong> เพื่อนำข้อมูลออกมาเป็นไฟล์ .agd</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่3_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p3">
+            <div class="img-caption">ภาพที่ 3: ขั้นตอนการดาวน์โหลดข้อมูล</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 4 -->
+        <h2>4. การแปลงไฟล์ (Data Scoring/Export)</h2>
+        <p>ไปที่แท็บ <strong>Scoring</strong> เพื่อดูผลวิเคราะห์ หรือเลือก <strong>Export</strong> หากต้องการส่งออกข้อมูลเป็นไฟล์ Excel (.csv) สำหรับการวิเคราะห์เพิ่มเติม</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่4_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p4">
+            <div class="img-caption">ภาพที่ 4: การแสดงผลข้อมูลในส่วน Scoring</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 5 -->
+        <h2>5. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
+        <p>ใส่รายละเอียดขั้นตอนที่ 5 ที่นี่...</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่5_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p5">
+            <div class="img-caption">ภาพที่ 5: คำอธิบายรูปภาพ</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 6 -->
+        <h2>6. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
+        <p>ใส่รายละเอียดขั้นตอนที่ 6 ที่นี่...</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่6_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p6">
+            <div class="img-caption">ภาพที่ 6: คำอธิบายรูปภาพ</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 7 -->
+        <h2>7. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
+        <p>ใส่รายละเอียดขั้นตอนที่ 7 ที่นี่...</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่7_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p7">
+            <div class="img-caption">ภาพที่ 7: คำอธิบายรูปภาพ</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 8 -->
+        <h2>8. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
+        <p>ใส่รายละเอียดขั้นตอนที่ 8 ที่นี่...</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่8_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p8">
+            <div class="img-caption">ภาพที่ 8: คำอธิบายรูปภาพ</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 9 -->
+        <h2>9. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
+        <p>ใส่รายละเอียดขั้นตอนที่ 9 ที่นี่...</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่9_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p9">
+            <div class="img-caption">ภาพที่ 9: คำอธิบายรูปภาพ</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 10 -->
+        <h2>10. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
+        <p>ใส่รายละเอียดขั้นตอนที่ 10 ที่นี่...</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่10_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p10">
+            <div class="img-caption">ภาพที่ 10: คำอธิบายรูปภาพ</div>
+        </div>
+
+        <!-- ขั้นตอนที่ 11 -->
+        <h2>11. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
+        <p>ใส่รายละเอียดขั้นตอนที่ 11 ที่นี่...</p>
+        <div class="image-container">
+            <img src="https://drive.google.com/uc?export=view&id=ใส่_ID_ของไฟล์_รูปที่11_ที่นี่" 
+                 onerror="this.src='https://placehold.co/600x300?text=Put+Drive+ID+Here'" alt="p11">
+            <div class="img-caption">ภาพที่ 11: คำอธิบายรูปภาพ</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
