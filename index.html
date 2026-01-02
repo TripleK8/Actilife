@@ -78,11 +78,14 @@
             padding: 25mm;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .section-content {
             display: none;
             animation: fadeIn 0.5s;
+            flex-grow: 1; /* Allow content to grow and push footer down */
         }
         
         .section-content.active {
@@ -145,6 +148,17 @@
             font-style: italic;
         }
 
+        /* Footer Credit */
+        .footer-credit {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
         /* Responsive */
         @media screen and (max-width: 768px) {
             .page { width: 95%; padding: 20px; margin: 10px auto; }
@@ -199,7 +213,7 @@
 
             <!-- Step 4 -->
             <h2>Step 4</h2>
-            <p>Enter user details (Age, Height, etc.). Then click <strong>Initialize</strong>.</p>
+            <p>Enter user details (Age, Height, etc.) or you can enter them later. Then click <strong>Initialize Devices</strong>.</p>
             <div class="image-container">
                 <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p4.png" onerror="this.src='https://placehold.co/600x300?text=p4.png'" alt="p4">
                 <div class="img-caption">Picture 4</div>
@@ -241,10 +255,12 @@
                 <div class="img-caption">Picture 3</div>
             </div>
         </div>
+
         <!-- Credit Footer -->
         <div class="footer-credit">
             KENG2026&copy;
         </div>
+
     </div>
 
     <script>
