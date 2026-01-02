@@ -9,10 +9,12 @@
     
     <style>
         :root {
-            --primary-color: #0056b3; /* สีหลัก (น้ำเงินเข้ม) */
+            --primary-color: #0056b3;
+            --secondary-color: #003d82;
             --text-color: #333;
             --bg-color: #f0f0f0;
             --paper-color: #ffffff;
+            --active-tab-bg: #eef6ff;
         }
 
         * {
@@ -23,23 +25,75 @@
             font-family: 'Sarabun', sans-serif;
             background-color: var(--bg-color);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: var(--text-color);
             line-height: 1.6;
+            padding-top: 70px; /* เว้นที่ให้เมนูบาร์ */
         }
 
-        /* จำลองกระดาษ A4 */
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            margin: 0 10px;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--active-tab-bg);
+        }
+
+        .nav-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,86,179,0.3);
+        }
+
+        /* --- Page Layout --- */
         .page {
             background-color: var(--paper-color);
             width: 210mm;
             min-height: 297mm;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 25mm;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
             position: relative;
         }
 
-        /* หัวข้อหลัก */
+        .section-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h1 {
             color: var(--primary-color);
             text-align: center;
@@ -65,12 +119,11 @@
             text-align: justify;
         }
 
-        /* ส่วนแสดงรูปภาพ */
         .image-container {
             width: 100%;
             margin: 20px 0;
             text-align: center;
-            border: 2px dashed #ccc; /* เส้นประแสดงขอบเขตภาพ */
+            border: 2px dashed #ccc;
             padding: 10px;
             background-color: #fafafa;
             border-radius: 8px;
@@ -92,12 +145,12 @@
             font-style: italic;
         }
 
-        /* ปุ่มสั่งพิมพ์ (จะไม่แสดงตอนพิมพ์จริง) */
+        /* Print Button */
         .print-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: var(--primary-color);
+            background-color: #28a745;
             color: white;
             padding: 12px 24px;
             border: none;
@@ -107,155 +160,144 @@
             font-size: 16px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             transition: all 0.3s;
+            z-index: 1000;
         }
 
         .print-btn:hover {
-            background-color: #003d82;
+            background-color: #218838;
             transform: translateY(-2px);
         }
 
-        /* Responsive สำหรับมือถือ */
         @media screen and (max-width: 768px) {
-            .page {
-                width: 100%;
-                padding: 15px;
-                height: auto;
-            }
-            body {
-                padding: 10px;
-            }
+            .page { width: 95%; padding: 20px; margin: 10px auto; }
+            .nav-btn { padding: 8px 15px; font-size: 14px; }
         }
 
-        /* ตั้งค่าสำหรับการสั่งพิมพ์ (Print / Save as PDF) */
         @media print {
-            body {
-                background-color: white;
-                padding: 0;
-            }
-            .page {
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                padding: 0;
-            }
-            .print-btn {
-                display: none;
-            }
-            .image-container {
-                border: none;
-            }
+            body { padding-top: 0; background-color: white; }
+            .navbar, .print-btn { display: none; }
+            .page { box-shadow: none; margin: 0; width: 100%; padding: 0; }
+            .section-content { display: block !important; }
         }
     </style>
 </head>
 <body>
 
-    <button class="print-btn" onclick="window.print()">🖨️ บันทึกเป็น PDF / พิมพ์</button>
+    <!-- เมนู (เปิดหน้า Download เป็นค่าเริ่มต้น เพื่อความสะดวกตามที่จัดกลุ่ม p1-p5 ไว้) -->
+    <nav class="navbar">
+        <button class="nav-btn" onclick="showSection('init')">Initialization (p6-p11)</button>
+        <button class="nav-btn active" onclick="showSection('download')">Download (p1-p5)</button>
+    </nav>
+
+    <button class="print-btn" onclick="window.print()">🖨️ พิมพ์ทั้งหมด</button>
 
     <div class="page">
-        <h1>คู่มือการใช้งานโปรแกรม ActiLife เบื้องต้น</h1>
-        <p>เอกสารฉบับนี้จัดทำขึ้นเพื่อแนะนำขั้นตอนการใช้งานโปรแกรม ActiLife สำหรับดึงข้อมูลและตั้งค่าอุปกรณ์วัดกิจกรรมทางกาย (ActiGraph) อย่างง่าย</p>
+        <h1>คู่มือการใช้งานโปรแกรม ActiLife</h1>
 
-        <!-- ขั้นตอนที่ 1 -->
-        <h2>1. การเชื่อมต่ออุปกรณ์ (Device Connection)</h2>
-        <p>เสียบอุปกรณ์ ActiGraph เข้ากับแท่นชาร์จ (Dock) หรือสาย USB และเชื่อมต่อเข้ากับคอมพิวเตอร์ จากนั้นเปิดโปรแกรม ActiLife ขึ้นมา</p>
-        <div class="image-container">
-            <!-- ใช้ลิงก์จาก Repo: Actilife ของ TripleK8 -->
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p1.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p1.png+on+GitHub'" alt="p1">
-            <div class="img-caption">ภาพที่ 1: การเชื่อมต่ออุปกรณ์</div>
+        <!-- ================= ส่วน Initialization (p6-p11) ================= -->
+        <div id="section-init" class="section-content">
+            <h2 style="border-left-color: #0056b3; background-color: #e3f2fd;">ส่วนที่ 1: Initialization</h2>
+            
+            <!-- ใส่รูป p6 - p11 ตามลำดับที่เหลือ -->
+            <h2>ขั้นตอนที่ 6</h2>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p6.png" onerror="this.src='https://placehold.co/600x300?text=p6.png'" alt="p6">
+                <div class="img-caption">ภาพที่ 6</div>
+            </div>
+
+            <h2>ขั้นตอนที่ 7</h2>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p7.png" onerror="this.src='https://placehold.co/600x300?text=p7.png'" alt="p7">
+                <div class="img-caption">ภาพที่ 7</div>
+            </div>
+
+            <h2>ขั้นตอนที่ 8</h2>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p8.png" onerror="this.src='https://placehold.co/600x300?text=p8.png'" alt="p8">
+                <div class="img-caption">ภาพที่ 8</div>
+            </div>
+
+            <h2>ขั้นตอนที่ 9</h2>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p9.png" onerror="this.src='https://placehold.co/600x300?text=p9.png'" alt="p9">
+                <div class="img-caption">ภาพที่ 9</div>
+            </div>
+
+            <h2>ขั้นตอนที่ 10</h2>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p10.png" onerror="this.src='https://placehold.co/600x300?text=p10.png'" alt="p10">
+                <div class="img-caption">ภาพที่ 10</div>
+            </div>
+
+            <h2>ขั้นตอนที่ 11</h2>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p11.png" onerror="this.src='https://placehold.co/600x300?text=p11.png'" alt="p11">
+                <div class="img-caption">ภาพที่ 11</div>
+            </div>
         </div>
 
-        <!-- ขั้นตอนที่ 2 -->
-        <h2>2. การตั้งค่าอุปกรณ์ (Initialization)</h2>
-        <p>เมื่อโปรแกรมตรวจพบอุปกรณ์ ให้ไปที่แท็บ <strong>Devices</strong> เลือกอุปกรณ์ที่ต้องการ แล้วคลิกปุ่ม <strong>Initialize</strong> เพื่อเริ่มการตั้งค่าการบันทึกข้อมูล</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p2.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p2.png+on+GitHub'" alt="p2">
-            <div class="img-caption">ภาพที่ 2: หน้าต่างการตั้งค่า (Initialize)</div>
-        </div>
+        <!-- ================= ส่วน Download (p1-p5) ================= -->
+        <div id="section-download" class="section-content active">
+            <h2 style="border-left-color: #28a745; background-color: #e8f5e9;">ส่วนที่ 2: Download</h2>
 
-        <!-- ขั้นตอนที่ 3 -->
-        <h2>3. การดาวน์โหลดข้อมูล (Data Download)</h2>
-        <p>เมื่อใช้งานเสร็จสิ้น ให้เชื่อมต่ออุปกรณ์อีกครั้ง เลือกอุปกรณ์ในรายการ และคลิกปุ่ม <strong>Download</strong> เพื่อนำข้อมูลออกมาเป็นไฟล์ .agd</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p3.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p3.png+on+GitHub'" alt="p3">
-            <div class="img-caption">ภาพที่ 3: ขั้นตอนการดาวน์โหลดข้อมูล</div>
-        </div>
+            <!-- ย้าย p1 - p5 มาไว้ที่นี่ตามคำสั่ง -->
+            <h2>ขั้นตอนที่ 1: การเชื่อมต่ออุปกรณ์</h2>
+            <p>เสียบอุปกรณ์ ActiGraph และเปิดโปรแกรม ActiLife</p>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p1.png" onerror="this.src='https://placehold.co/600x300?text=p1.png'" alt="p1">
+                <div class="img-caption">ภาพที่ 1: การเชื่อมต่ออุปกรณ์</div>
+            </div>
 
-        <!-- ขั้นตอนที่ 4 -->
-        <h2>4. การแปลงไฟล์ (Data Scoring/Export)</h2>
-        <p>ไปที่แท็บ <strong>Scoring</strong> เพื่อดูผลวิเคราะห์ หรือเลือก <strong>Export</strong> หากต้องการส่งออกข้อมูลเป็นไฟล์ Excel (.csv) สำหรับการวิเคราะห์เพิ่มเติม</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p4.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p4.png+on+GitHub'" alt="p4">
-            <div class="img-caption">ภาพที่ 4: การแสดงผลข้อมูลในส่วน Scoring</div>
-        </div>
+            <h2>ขั้นตอนที่ 2: การตั้งค่า (Initialization)</h2>
+            <p>เลือกอุปกรณ์และกด Initialize</p>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p2.png" onerror="this.src='https://placehold.co/600x300?text=p2.png'" alt="p2">
+                <div class="img-caption">ภาพที่ 2: หน้าต่าง Initialize</div>
+            </div>
 
-        <!-- ขั้นตอนที่ 5 -->
-        <h2>5. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
-        <p>ใส่รายละเอียดขั้นตอนที่ 5 ที่นี่...</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p5.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p5.png+on+GitHub'" alt="p5">
-            <div class="img-caption">ภาพที่ 5: คำอธิบายรูปภาพ</div>
-        </div>
+            <h2>ขั้นตอนที่ 3: การดาวน์โหลดข้อมูล</h2>
+            <p>กดปุ่ม Download เพื่อดึงข้อมูล</p>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p3.png" onerror="this.src='https://placehold.co/600x300?text=p3.png'" alt="p3">
+                <div class="img-caption">ภาพที่ 3: ขั้นตอน Download</div>
+            </div>
 
-        <!-- ขั้นตอนที่ 6 -->
-        <h2>6. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
-        <p>ใส่รายละเอียดขั้นตอนที่ 6 ที่นี่...</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p6.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p6.png+on+GitHub'" alt="p6">
-            <div class="img-caption">ภาพที่ 6: คำอธิบายรูปภาพ</div>
-        </div>
+            <h2>ขั้นตอนที่ 4: การแปลงไฟล์ (Scoring)</h2>
+            <p>ดูผลวิเคราะห์หรือ Export ข้อมูล</p>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p4.png" onerror="this.src='https://placehold.co/600x300?text=p4.png'" alt="p4">
+                <div class="img-caption">ภาพที่ 4: หน้า Scoring</div>
+            </div>
 
-        <!-- ขั้นตอนที่ 7 -->
-        <h2>7. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
-        <p>ใส่รายละเอียดขั้นตอนที่ 7 ที่นี่...</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p7.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p7.png+on+GitHub'" alt="p7">
-            <div class="img-caption">ภาพที่ 7: คำอธิบายรูปภาพ</div>
-        </div>
-
-        <!-- ขั้นตอนที่ 8 -->
-        <h2>8. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
-        <p>ใส่รายละเอียดขั้นตอนที่ 8 ที่นี่...</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p8.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p8.png+on+GitHub'" alt="p8">
-            <div class="img-caption">ภาพที่ 8: คำอธิบายรูปภาพ</div>
-        </div>
-
-        <!-- ขั้นตอนที่ 9 -->
-        <h2>9. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
-        <p>ใส่รายละเอียดขั้นตอนที่ 9 ที่นี่...</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p9.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p9.png+on+GitHub'" alt="p9">
-            <div class="img-caption">ภาพที่ 9: คำอธิบายรูปภาพ</div>
-        </div>
-
-        <!-- ขั้นตอนที่ 10 -->
-        <h2>10. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
-        <p>ใส่รายละเอียดขั้นตอนที่ 10 ที่นี่...</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p10.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p10.png+on+GitHub'" alt="p10">
-            <div class="img-caption">ภาพที่ 10: คำอธิบายรูปภาพ</div>
-        </div>
-
-        <!-- ขั้นตอนที่ 11 -->
-        <h2>11. ขั้นตอนเพิ่มเติม (ระบุชื่อขั้นตอน)</h2>
-        <p>ใส่รายละเอียดขั้นตอนที่ 11 ที่นี่...</p>
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p11.png" 
-                 onerror="this.src='https://placehold.co/600x300?text=Check+p11.png+on+GitHub'" alt="p11">
-            <div class="img-caption">ภาพที่ 11: คำอธิบายรูปภาพ</div>
+            <h2>ขั้นตอนที่ 5</h2>
+            <p>รายละเอียดเพิ่มเติมของขั้นตอนที่ 5</p>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p5.png" onerror="this.src='https://placehold.co/600x300?text=p5.png'" alt="p5">
+                <div class="img-caption">ภาพที่ 5</div>
+            </div>
         </div>
 
     </div>
+
+    <script>
+        function showSection(sectionId) {
+            const contents = document.querySelectorAll('.section-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById('section-' + sectionId).classList.add('active');
+            
+            // หาปุ่มที่ถูกกดแล้วใส่ class active
+            const activeButton = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(sectionId));
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
