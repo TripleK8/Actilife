@@ -28,7 +28,7 @@
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
-            padding-top: 70px; /* เว้นที่ให้เมนูบาร์ */
+            padding-top: 70px;
         }
 
         /* --- Navbar --- */
@@ -183,10 +183,10 @@
 </head>
 <body>
 
-    <!-- เมนู (เปิดหน้า Download เป็นค่าเริ่มต้น เพื่อความสะดวกตามที่จัดกลุ่ม p1-p5 ไว้) -->
+    <!-- เมนู -->
     <nav class="navbar">
-        <button class="nav-btn" onclick="showSection('init')">Initialization (p6-p11)</button>
-        <button class="nav-btn active" onclick="showSection('download')">Download (p1-p5)</button>
+        <button class="nav-btn active" onclick="showSection('init')">Initialization</button>
+        <button class="nav-btn" onclick="showSection('download')">Download</button>
     </nav>
 
     <button class="print-btn" onclick="window.print()">🖨️ พิมพ์ทั้งหมด</button>
@@ -194,86 +194,77 @@
     <div class="page">
         <h1>คู่มือการใช้งานโปรแกรม ActiLife</h1>
 
-        <!-- ================= ส่วน Initialization (p6-p11) ================= -->
-        <div id="section-init" class="section-content">
-            <h2 style="border-left-color: #0056b3; background-color: #e3f2fd;">ส่วนที่ 1: Initialization</h2>
+        <!-- ================= ส่วน Initialization (5 ขั้นตอน: p1-p5) ================= -->
+        <div id="section-init" class="section-content active">
+            <h2 style="border-left-color: #0056b3; background-color: #e3f2fd;">ส่วนที่ 1: การเตรียมเครื่อง (Initialization)</h2>
             
-            <!-- ใส่รูป p6 - p11 ตามลำดับที่เหลือ -->
-            <h2>ขั้นตอนที่ 6</h2>
+            <!-- ขั้นตอนที่ 1 -->
+            <h2>ขั้นตอนที่ 1</h2>
+            <p>กดที่ปุ่ม Initialize</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p6.png" onerror="this.src='https://placehold.co/600x300?text=p6.png'" alt="p6">
-                <div class="img-caption">ภาพที่ 6</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p1.png" onerror="this.src='https://placehold.co/600x300?text=p1.png'" alt="p1">
+                <div class="img-caption">ภาพที่ 1: กดปุ่ม Initialize</div>
             </div>
 
-            <h2>ขั้นตอนที่ 7</h2>
+            <!-- ขั้นตอนที่ 2 -->
+            <h2>ขั้นตอนที่ 2</h2>
+            <p>ต่อด้วยกด Regular Initialization</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p7.png" onerror="this.src='https://placehold.co/600x300?text=p7.png'" alt="p7">
-                <div class="img-caption">ภาพที่ 7</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p2.png" onerror="this.src='https://placehold.co/600x300?text=p2.png'" alt="p2">
+                <div class="img-caption">ภาพที่ 2: เลือก Regular Initialization</div>
             </div>
 
-            <h2>ขั้นตอนที่ 8</h2>
+            <!-- ขั้นตอนที่ 3 -->
+            <h2>ขั้นตอนที่ 3</h2>
+            <p>ตั้งค่าวันเวลาเริ่มและหยุดตามที่คุณต้องการ และ Sample Rate และที่เหลือตั้งค่าตามภาพ และกดปุ่ม Enter Subject Info</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p8.png" onerror="this.src='https://placehold.co/600x300?text=p8.png'" alt="p8">
-                <div class="img-caption">ภาพที่ 8</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p3.png" onerror="this.src='https://placehold.co/600x300?text=p3.png'" alt="p3">
+                <div class="img-caption">ภาพที่ 3: ตั้งค่าวันเวลาและ Sample Rate</div>
             </div>
 
-            <h2>ขั้นตอนที่ 9</h2>
+            <!-- ขั้นตอนที่ 4 -->
+            <h2>ขั้นตอนที่ 4</h2>
+            <p>ใส่เพศ อายุ ส่วนสูง ฯลฯ ได้เลย หรือจะใส่ทีหลังก็ได้ และกด Initialize</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p9.png" onerror="this.src='https://placehold.co/600x300?text=p9.png'" alt="p9">
-                <div class="img-caption">ภาพที่ 9</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p4.png" onerror="this.src='https://placehold.co/600x300?text=p4.png'" alt="p4">
+                <div class="img-caption">ภาพที่ 4: ใส่ข้อมูลผู้ใช้งาน</div>
             </div>
 
-            <h2>ขั้นตอนที่ 10</h2>
+            <!-- ขั้นตอนที่ 5 -->
+            <h2>ขั้นตอนที่ 5</h2>
+            <p>ตรวจสอบวันเวลา ดูไอคอน ว่าแสดงแล้ว</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p10.png" onerror="this.src='https://placehold.co/600x300?text=p10.png'" alt="p10">
-                <div class="img-caption">ภาพที่ 10</div>
-            </div>
-
-            <h2>ขั้นตอนที่ 11</h2>
-            <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p11.png" onerror="this.src='https://placehold.co/600x300?text=p11.png'" alt="p11">
-                <div class="img-caption">ภาพที่ 11</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p5.png" onerror="this.src='https://placehold.co/600x300?text=p5.png'" alt="p5">
+                <div class="img-caption">ภาพที่ 5: ตรวจสอบความเรียบร้อย</div>
             </div>
         </div>
 
-        <!-- ================= ส่วน Download (p1-p5) ================= -->
-        <div id="section-download" class="section-content active">
-            <h2 style="border-left-color: #28a745; background-color: #e8f5e9;">ส่วนที่ 2: Download</h2>
+        <!-- ================= ส่วน Download (3 ขั้นตอน: p6-p8) ================= -->
+        <div id="section-download" class="section-content">
+            <h2 style="border-left-color: #28a745; background-color: #e8f5e9;">ส่วนที่ 2: การดึงข้อมูล (Download)</h2>
 
-            <!-- ย้าย p1 - p5 มาไว้ที่นี่ตามคำสั่ง -->
-            <h2>ขั้นตอนที่ 1: การเชื่อมต่ออุปกรณ์</h2>
-            <p>เสียบอุปกรณ์ ActiGraph และเปิดโปรแกรม ActiLife</p>
+            <!-- ขั้นตอนที่ 1 (ของส่วน Download) -->
+            <h2>ขั้นตอนที่ 1: เชื่อมต่อและดาวน์โหลด</h2>
+            <p>เมื่อใช้งานเสร็จ นำอุปกรณ์กลับมาเสียบที่แท่นชาร์จและกดปุ่ม Download</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p1.png" onerror="this.src='https://placehold.co/600x300?text=p1.png'" alt="p1">
-                <div class="img-caption">ภาพที่ 1: การเชื่อมต่ออุปกรณ์</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p6.png" onerror="this.src='https://placehold.co/600x300?text=p6.png'" alt="p6">
+                <div class="img-caption">ภาพที่ 1: กดปุ่ม Download</div>
             </div>
 
-            <h2>ขั้นตอนที่ 2: การตั้งค่า (Initialization)</h2>
-            <p>เลือกอุปกรณ์และกด Initialize</p>
+            <!-- ขั้นตอนที่ 2 (ของส่วน Download) -->
+            <h2>ขั้นตอนที่ 2: บันทึกไฟล์</h2>
+            <p>เลือกตำแหน่งที่ต้องการบันทึกไฟล์ข้อมูล (.agd)</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p2.png" onerror="this.src='https://placehold.co/600x300?text=p2.png'" alt="p2">
-                <div class="img-caption">ภาพที่ 2: หน้าต่าง Initialize</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p7.png" onerror="this.src='https://placehold.co/600x300?text=p7.png'" alt="p7">
+                <div class="img-caption">ภาพที่ 2: เลือกที่จัดเก็บไฟล์</div>
             </div>
 
-            <h2>ขั้นตอนที่ 3: การดาวน์โหลดข้อมูล</h2>
-            <p>กดปุ่ม Download เพื่อดึงข้อมูล</p>
+            <!-- ขั้นตอนที่ 3 (ของส่วน Download) -->
+            <h2>ขั้นตอนที่ 3: ตรวจสอบข้อมูล</h2>
+            <p>เมื่อดาวน์โหลดเสร็จสิ้น สามารถดูผลเบื้องต้นได้ที่หน้า Data Scoring</p>
             <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p3.png" onerror="this.src='https://placehold.co/600x300?text=p3.png'" alt="p3">
-                <div class="img-caption">ภาพที่ 3: ขั้นตอน Download</div>
-            </div>
-
-            <h2>ขั้นตอนที่ 4: การแปลงไฟล์ (Scoring)</h2>
-            <p>ดูผลวิเคราะห์หรือ Export ข้อมูล</p>
-            <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p4.png" onerror="this.src='https://placehold.co/600x300?text=p4.png'" alt="p4">
-                <div class="img-caption">ภาพที่ 4: หน้า Scoring</div>
-            </div>
-
-            <h2>ขั้นตอนที่ 5</h2>
-            <p>รายละเอียดเพิ่มเติมของขั้นตอนที่ 5</p>
-            <div class="image-container">
-                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p5.png" onerror="this.src='https://placehold.co/600x300?text=p5.png'" alt="p5">
-                <div class="img-caption">ภาพที่ 5</div>
+                <img src="https://raw.githubusercontent.com/TripleK8/Actilife/main/p8.png" onerror="this.src='https://placehold.co/600x300?text=p8.png'" alt="p8">
+                <div class="img-caption">ภาพที่ 3: แสดงผลข้อมูล</div>
             </div>
         </div>
 
@@ -289,7 +280,6 @@
 
             document.getElementById('section-' + sectionId).classList.add('active');
             
-            // หาปุ่มที่ถูกกดแล้วใส่ class active
             const activeButton = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(sectionId));
             if (activeButton) {
                 activeButton.classList.add('active');
